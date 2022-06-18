@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Covid Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+          <link rel="shortcut icon" type="image/x-icon" href="../public/favicon.ico" th:href="@{favicon.ico}">
+</head>
+
+<body class="bg-image" style="background-image: url('https://img.wallpapersafari.com/desktop/1680/1050/26/44/l2LxiS.jpg');
+            background-size: cover, contain;
+            height: 100vh;">
+    <div class="container">
+        <h1 class="text-center pt-5">Aplicação de monitoramento de COVID-19</h1>
+        <p class="text-center">
+            Essa aplicação lista os números atuais de casos de COVID-19 reportados no mundo.
+            Dados obtidos em <a href="https://coronavirus.jhu.edu/map.html">JHU CSSE COVID-19 Data</a> 
+        </p>
+
+
+        <!--Jumbotron -->
+        <div class=" bg-image p-5 mt-5 mb-4 bg-light rounded-3"
+            style="background-image: url('https://img.freepik.com/free-vector/realistic-coronavirus-background_1393-285.jpg?w=1380&t=st=1655498295~exp=1655498895~hmac=e38a5ae6cac4a8c9e78cd91bfb2f0f6d81d3823eb7bb453b871618a2f5ed388c');">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold" id="totalNum" th:text="${totalReportedCases}"></h1>
+                <p class="col-md-8 fs-4">Total de Casos reportados por Covid</p>
+                <hr class="my-4">
+                <p>
+                    <span> Novos casos de covid reportados ontem:</span>
+                    <span th:text="${totalNewCases}"></span>
+                </p>
+            </div>
+        </div>
+
+        <table class="table table-success table-hover table-striped">
+            <tr>
+                <th>Estado / Província</th>
+                <th>País</th>
+                <th>Total de casos reportados</th>
+                <th>Mudanças desde o último dia (+)</th>
+            </tr>
+            <tr th:each="locationStat : ${locationStats}">
+                <td th:text="${locationStat.state}"></td>
+                <td th:text="${locationStat.country}"></td>
+                <td th:text="${locationStat.latestTotalCases}">0</td>
+                <td th:text="${locationStat.diffFromPrevDay}">0</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
